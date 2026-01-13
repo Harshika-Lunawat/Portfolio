@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harshika Lunawat | Portfolio</title>
+
+  <style>
+    /* ================== GLOBAL ================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      color: lab(100% 0.01 -0.01);
+      background: hsl(0, 0%, 0%);
+      overflow-x: hidden; 
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ================== CANVAS BACKGROUND ================== */
+    #techCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at top, #020024, #000814);
+    }
+
+    /* ================== NAVBAR ================== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      position: sticky;
+      top: 0;
+      background: #00000099;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: hsl(318, 100%, 50%);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a:hover {
+      color: hwb(326 0% 0%);
+    }
+
+    /* ================== HEROINE SECTION ================== */
+    .heroine {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 3rem;
+    }
+
+    .heroine-content {
+      max-width: 600px;
+    }
+
+    .heroine-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .heroine-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: lab(55.11% 85.15 -0.4);
+    }
+
+    .heroine-description {
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+
+    .heroine-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: #ff0080;
+      color: hwb(0 0% 100%);
+    }
+
+    .btn-primary:hover {
+      background: hwb(329 0% 20%);
+    }
+
+    .btn-secondary {
+      border: 1px solid hwb(336 0% 0%);
+      color: hsl(337, 100%, 50%);
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background: hsl(348, 100%, 50%);
+      color: #000;
+    }
+
+    .heroine-model img {
+      width: 300px;
+      filter: drop-shadow(0 0 20px #00ffff);
+    }
+
+    /* ================== SECTIONS ================== */
+    section {
+      padding: 4rem 3rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
+      color: hsl(327, 100%, 50%);
+    }
+
+    /* ================== ABOUT ================== */
+    .about-content {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about img {
+      width: 220px;
+    }
+
+    .skills {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      padding: 0.4rem 0.8rem;
+      background: #e100ff26;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* ================== PROJECTS ================== */
+    .project-row {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .project-row.right {
+      flex-direction: row-reverse;
+    }
+
+    .project-image img {
+      width: 280px;
+      border-radius: 10px;
+    }
+
+    .project-tech span {
+      margin-right: 0.5rem;
+      color: hsl(309, 100%, 50%);
+      font-size: 0.85rem;
+    }
+
+    /* ================== INTERNSHIP ================== */
+    .internship-card {
+      max-width: 500px;
+      margin: auto;
+      padding: 2rem;
+      background: #a55ec60d;
+      border-radius: 12px;
+      border: 1px solid #d400ff33;
+    }
+
+    /* ================== CONTACT ================== */
+    .contact-container {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
+      border-radius: 6px;
+      border: none;
+    }
+
+    .contact-form textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    @media (max-width: 900px) {
+      .heroine {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="techCanvas"></canvas>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">Harshika Lunawat</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#academics">Academics</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#internships">Internships</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- HEROINE -->
+    <section class="heroine" id="home">
+      <div class="heroine-content">
+        <h1 class="heroine-title">Hi, I'm Harshika Lunawat</h1>
+        <p class="heroine-subtitle">MCA Student | Software Developer</p>
+        <p class="heroine-description">
+          Passionate about building innovative solutions. Currently pursuing MCA at
+          G.H. Raisoni College of Engineering, Nagpur.
+        </p>
+        <div class="heroine-buttons">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="heroine-model">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/059/402/021/small/beautiful-minimalist-studying-teenager-with-textbooks-exclusive-png.png"
+          alt="Illustration">
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/036/498/133/small/ai-generated-3d-cartoon-child-character-in-a-graduation-cap-isolated-on-transparent-background-png.png"
+          alt="">
+        <div>
+          <p>
+            I'm a dedicated MCA student at G.H. Raisoni College of Engineering, Nagpur,
+            passionate about software development and cloud technologies.
+          </p>
+
+          <h3 style="margin-top:1.5rem;">Technical Skills</h3>
+          <div class="skills">
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================== ACADEMICS SECTION ================== -->
+<section id="academics" class="academics">
+  <h2 class="section-title">Academic Journey</h2>
+
+  <div class="academics-timeline">
+
+    <div class="academic-item">
+      <h3>Master of Computer Applications (MCA)</h3>
+      <p class="institute">G.H. Raisoni College of Engineering, Nagpur</p>
+      <span class="year">2025 – 2027</span>
+      <p>
+        Currently pursuing MCA with focus on software development, web technologies,
+        databases, and cloud computing.
+      </p>
+    </div>
+
+    <div class="academic-item">
+      <h3>Bachelor’s Degree</h3>
+      <p class="institute">CMCS, Yavatmal</p>
+      <span class="year">2022 – 2025</span>
+      <p>
+        Completed undergraduate studies where I developed strong interest in
+        programming and problem-solving.
+      </p>
+    </div>
+
+    <div class="academic-item">
+      <h3>Higher Secondary (12th)</h3>
+      <p class="institute">JD Junior College, Yavatmal</p>
+      <span class="year">2020 – 2022</span>
+      <p>
+        Studied science stream with focus on mathematics.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================== PROJECTS SECTION ================== -->
+<section id="projects" class="projects">
+  <h2 class="section-title">Projects</h2>
+
+  <!-- Project 1 -->
+  <div class="project-row left">
+    <div class="project-image">
+      <img src="images/project1.png" alt="Unified Telemetry Integration Platform">
+    </div>
+
+    <div class="project-content">
+      <h3>🛒 Unified Telemetry Integration Platform</h3>
+      <p>
+        Developed a complete Unified Telemetry Integration Platform with admin dashboard.
+      </p>
+      <div class="project-tech">
+        <span>Python</span>
+        <span>MongoDB</span>
+        <span>HTML</span>
+        <span>CSS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 2 -->
+  <div class="project-row right">
+    <div class="project-image">
+      <img src="images/project2.png" alt="Multilang Chatbot">
+    </div>
+
+    <div class="project-content">
+      <h3>🤖 Multilang Chatbot</h3>
+      <p>
+        Built an intelligent chatbot using Python making different languages easy to be learned and to handle customer queries.
+      </p>
+      <div class="project-tech">
+        <span>Python</span>
+        <span>HTML</span>
+        <span>CSS</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+    <!-- INTERNSHIP -->
+    <section id="internships">
+      <h2 class="section-title">Internship Program Experience</h2>
+      <div class="internship-card">
+        <h3>Online Internship Program Experience</h3>
+        <p>Deloitte (Australia)</p>
+        <p>
+          Solved client problem statements and developed software solutions as per
+          requirements.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Get In Touch</h2>
+      <div class="contact-container">
+        <div>
+          <div class="contact-item">📧 lunawatharshika@gmail.com</div>
+          <div class="contact-item">📍 Nagpur, Maharashtra</div>
+        </div>
+
+        <form class="contact-form">
+          <label>Name</label>
+          <input type="text" required>
+          <label>Email</label>
+          <input type="email" required>
+          <label>Message</label>
+          <textarea required></textarea>
+          <button class="btn btn-primary" style="margin-top:1rem;">Send</button>
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ================== CANVAS ANIMATION ================== -->
+  <script>
+    const canvas = document.getElementById("techCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    let particles = [];
+    const count = 120;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.size = Math.random() * 2 + 0.5;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+      draw() {
+        ctx.fillStyle = "rgba(0,255,255,0.7)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particles = [];
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+
+    function connect() {
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.strokeStyle = "rgba(0,255,255,0.15)";
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      connect();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      init();
+    });
+
+    init();
+    animate();
+  </script>
+<script src="script.js"></script>
+</body>
+</html>
